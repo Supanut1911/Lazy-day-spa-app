@@ -1,4 +1,4 @@
-import { User } from '../../../shared/types';
+import { User } from '../shared/types';
 
 const USER_LOCALSTORAGE_KEY = 'lazyday_user';
 

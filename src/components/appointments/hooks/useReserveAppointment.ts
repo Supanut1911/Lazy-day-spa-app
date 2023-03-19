@@ -1,6 +1,6 @@
-import { Appointment } from '../../../../../shared/types';
 import { axiosInstance } from '../../../axiosInstance';
 import { queryKeys } from '../../../react-query/constants';
+import { Appointment } from '../../../shared/types';
 import { useCustomToast } from '../../app/hooks/useCustomToast';
 import { useUser } from '../../user/hooks/useUser';
 

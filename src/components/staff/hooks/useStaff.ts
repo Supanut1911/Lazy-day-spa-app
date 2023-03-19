@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 
-import type { Staff } from '../../../../../shared/types';
 import { axiosInstance } from '../../../axiosInstance';
 import { queryKeys } from '../../../react-query/constants';
+import type { Staff } from '../../../shared/types';
 import { filterByTreatment } from '../utils';
 
 // for when we need a query function for useQuery

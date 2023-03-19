@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import type { Treatment } from '../../../../../shared/types';
 import { axiosInstance } from '../../../axiosInstance';
 import { queryKeys } from '../../../react-query/constants';
+import type { Treatment } from '../../../shared/types';
 import { useCustomToast } from '../../app/hooks/useCustomToast';
 
 // for when we need a query function for useQuery
