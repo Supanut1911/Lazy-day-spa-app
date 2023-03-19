@@ -18,4 +18,4 @@ import { QueryClient } from '@tanstack/react-query';
 // to satisfy typescript until this file has uncommented contents
 // export {};
 
-export const quertClient = new QueryClient();
+export const queryClient = new QueryClient();
