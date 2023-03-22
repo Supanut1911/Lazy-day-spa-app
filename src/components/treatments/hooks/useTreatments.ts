@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { axiosInstance } from '../../../axiosInstance';
 import { queryKeys } from '../../../react-query/constants';
@@ -25,4 +25,9 @@ export function useTreatments(): Treatment[] {
     // }
   );
   return data;
+}
+
+export function usePrefetchTreatments(): void {
+  const queryClient = useQueryClient();
+  queryClient.prefetchQuery([queryKeys.treatments], getTreatments);
 }
