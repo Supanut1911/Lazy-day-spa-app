@@ -8,12 +8,17 @@ import { useCustomToast } from '../../app/hooks/useCustomToast';
 // for when we need a query function for useQuery
 const getTreatments = async (): Promise<Treatment[]> => {
   const { data } = await axiosInstance.get('/treatments');
-  console.log('called');
-
   return data;
 };
 export function useTreatments(): Treatment[] {
   const fallback = [];
-  const { data = fallback } = useQuery([queryKeys.treatments], getTreatments);
+  const toast = useCustomToast();
+  const { data = fallback } = useQuery([queryKeys.treatments], getTreatments, {
+    onError: (error) => {
+      const title =
+        error instanceof Error ? error.message : 'error connection to server';
+      toast({ title, status: 'error' });
+    },
+  });
   return data;
 }
