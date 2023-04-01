@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { Dispatch, SetStateAction, useState } from 'react';
 
@@ -70,7 +71,12 @@ export function useAppointments(): UseAppointments {
   //
   //    2. The getAppointments query function needs monthYear.year and
   //       monthYear.month
-  const appointments = {};
+  const fallback = {};
+  // const appointments = {};
+  const { data: appointments = fallback } = useQuery(
+    [queryKeys.appointments],
+    () => getAppointments(monthYear.year, monthYear.month),
+  );
 
   /** ****************** END 3: useQuery  ******************************* */
 
