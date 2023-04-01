@@ -74,7 +74,7 @@ export function useAppointments(): UseAppointments {
   const fallback = {};
   // const appointments = {};
   const { data: appointments = fallback } = useQuery(
-    [queryKeys.appointments],
+    [queryKeys.appointments, monthYear.year, monthYear.month],
     () => getAppointments(monthYear.year, monthYear.month),
   );
 
