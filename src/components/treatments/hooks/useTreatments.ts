@@ -13,21 +13,20 @@ const getTreatments = async (): Promise<Treatment[]> => {
 export function useTreatments(): Treatment[] {
   const fallback = [];
   const toast = useCustomToast();
-  const { data = fallback } = useQuery(
-    [queryKeys.treatments],
-    getTreatments,
-    //   {
-    //   onError: (error) => {
-    //     const title =
-    //       error instanceof Error ? error.message : 'error connection to server';
-    //     toast({ title, status: 'error' });
-    //   },
-    // }
-  );
+  const { data = fallback } = useQuery([queryKeys.treatments], getTreatments, {
+    staleTime: 60000,
+    cacheTime: 90000,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+  });
   return data;
 }
 
 export function usePrefetchTreatments(): void {
   const queryClient = useQueryClient();
-  queryClient.prefetchQuery([queryKeys.treatments], getTreatments);
+  queryClient.prefetchQuery([queryKeys.treatments], getTreatments, {
+    staleTime: 60000,
+    cacheTime: 90000,
+  });
 }
