@@ -37,18 +37,31 @@ export function useUser(): UseUser {
   // TODO: call useQuery to update user data from server
   // const user = null;
   const queryClinet = useQueryClient();
-  const { data: user } = useQuery([queryKeys.user], () => getUser(user));
+  const { data: user } = useQuery([queryKeys.user], () => getUser(user), {
+    initialData: getStoredUser,
+
+    // onSuccess is no longer called from setQueryData
+    // onSuccess: (received: User | null) => {
+    //   if (!received) {
+    //     clearStoredUser();
+    //   } else {
+    //     setStoredUser(received);
+    //   }
+    // },
+  });
 
   // meant to be called from useAuth
   function updateUser(newUser: User): void {
     // TODO: update the user in the query cache
     queryClinet.setQueryData([queryKeys.user], newUser);
+    setStoredUser(newUser);
   }
 
   // meant to be called from useAuth
   function clearUser() {
     // TODO: reset user to null in query cache
     queryClinet.setQueryData([queryKeys.user], null);
+    clearStoredUser();
   }
 
   return { user, updateUser, clearUser };
