@@ -62,6 +62,9 @@ export function useUser(): UseUser {
     // TODO: reset user to null in query cache
     queryClinet.setQueryData([queryKeys.user], null);
     clearStoredUser();
+
+    // remove user appointment query
+    queryClinet.removeQueries(['user-appointments']);
   }
 
   return { user, updateUser, clearUser };
