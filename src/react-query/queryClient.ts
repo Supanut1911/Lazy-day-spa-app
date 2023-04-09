@@ -20,6 +20,10 @@ function queryErrorHandler(error: unknown): void {
 
 export const queryClient = new QueryClient({
   defaultOptions: {
+    mutations: {
+      onError: queryErrorHandler,
+    },
+
     queries: {
       onError: queryErrorHandler,
       staleTime: 60000,
