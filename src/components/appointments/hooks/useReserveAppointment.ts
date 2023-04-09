@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 
 import { axiosInstance } from '../../../axiosInstance';
 import { queryKeys } from '../../../react-query/constants';
@@ -19,10 +19,12 @@ async function setAppointmentUser(
   });
 }
 
-// TODO: update type for React Query mutate function
-type AppointmentMutationFunction = (appointment: Appointment) => void;
-
-export function useReserveAppointment(): AppointmentMutationFunction {
+export function useReserveAppointment(): UseMutateFunction<
+  void,
+  unknown,
+  Appointment,
+  unknown
+> {
   const { user } = useUser();
   const toast = useCustomToast();
 
