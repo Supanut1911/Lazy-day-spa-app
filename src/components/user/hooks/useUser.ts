@@ -64,7 +64,7 @@ export function useUser(): UseUser {
     clearStoredUser();
 
     // remove user appointment query
-    queryClinet.removeQueries(['user-appointments']);
+    queryClinet.removeQueries([queryKeys.appointments, queryKeys.user]);
   }
 
   return { user, updateUser, clearUser };
