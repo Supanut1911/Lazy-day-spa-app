@@ -1,5 +1,7 @@
-import { screen } from '@testing-library/react';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
+import { generateQueryClient } from 'react-query/queryClient';
 import { renderWithQuery } from 'test-utils';
 
 // import { renderWithClient } from '../../../test-utils';
@@ -25,7 +27,19 @@ test('handles query error', async () => {
     }),
   );
 
-  renderWithQuery(<AllStaff />);
+  const queryClient = generateQueryClient();
+  const options = queryClient.getDefaultOptions();
+  options.queries = { ...options.queries, retry: false };
+  queryClient.setDefaultOptions(options);
+
+  // renderWithQuery(<AllStaff />);
+
+  // render wrapped with provider
+  render(
+    <QueryClientProvider client={queryClient}>
+      <AllStaff />
+    </QueryClientProvider>,
+  );
 
   const alertToast = await screen.findByRole('alert');
   expect(alertToast).toHaveTextContent('Request failed with status code 500');
