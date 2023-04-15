@@ -18,19 +18,28 @@ function queryErrorHandler(error: unknown): void {
 // to satisfy typescript until this file has uncommented contents
 // export {};
 
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    mutations: {
-      onError: queryErrorHandler,
+export const generateQueryClient = (): QueryClient => {
+  return new QueryClient({
+    logger: {
+      log: console.log,
+      warn: console.warn,
+      error: () => {},
     },
+    defaultOptions: {
+      mutations: {
+        onError: queryErrorHandler,
+      },
 
-    queries: {
-      onError: queryErrorHandler,
-      staleTime: 60000,
-      cacheTime: 90000,
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
+      queries: {
+        onError: queryErrorHandler,
+        staleTime: 60000,
+        cacheTime: 90000,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+      },
     },
-  },
-});
+  });
+};
+
+export const queryClient = generateQueryClient();
